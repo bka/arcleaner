@@ -75,6 +75,13 @@ class DeleteImage extends BaseCommand
         }
     }
 
+    /**
+     * findImageToDelete
+     *
+     * @param array $images
+     * @param name $name
+     * @return \Bka\ARCleaner\Image
+     */
     protected function findImageToDelete($images, $name)
     {
         foreach ($images as $image) {
@@ -90,6 +97,7 @@ class DeleteImage extends BaseCommand
      *
      * @param string $hash
      * @param array $images
+     * @return int
      */
     protected function countLayerUsage($hash, $images)
     {

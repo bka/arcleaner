@@ -9,8 +9,16 @@ use Bka\ARCleaner\Layer;
  */
 class Manifest
 {
+    /**
+     * @var array
+     */
     protected $layers = [];
 
+    /**
+     * __construct
+     *
+     * @param string $jsonString
+     */
     public function __construct($jsonString)
     {
         $data = json_decode($jsonString, true);
@@ -20,6 +28,10 @@ class Manifest
         }
     }
 
+    /**
+     * getLayers
+     * @return array
+     */
     public function getLayers()
     {
         return $this->layers;

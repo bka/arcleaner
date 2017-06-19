@@ -6,6 +6,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+
 /**
  * Class: BaseCommand
  *
@@ -75,6 +76,10 @@ class BaseCommand extends Command
         }
     }
 
+    /**
+     * getClient
+     * @return \Bka\ARCleaner\Client
+     */
     public function getClient()
     {
         if (!$this->client) {

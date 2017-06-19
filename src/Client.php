@@ -26,6 +26,10 @@ class Client
         $this->context = $context;
     }
 
+    /**
+     * getImages
+     * @return array
+     */
     public function getImages()
     {
         $result = [];
@@ -50,6 +54,13 @@ class Client
         return $result;
     }
 
+    /**
+     * getBlobsToDeleteForImage
+     *
+     * @param string $imageName
+     * @param string $tag
+     * @return string
+     */
     public function getBlobsToDeleteForImage($imageName, $tag)
     {
         $names = [];
@@ -69,12 +80,24 @@ class Client
         return array_unique($names);
     }
 
+    /**
+     * readBlob
+     *
+     * @param string $name
+     * @return string
+     */
     public function readBlob($name)
     {
         $getBlobResult = $this->context->getClient()->getBlob($this->context->getRepository(), $name);
         return stream_get_contents($getBlobResult->getContentStream());
     }
 
+    /**
+     * convertHashToBlobPath
+     *
+     * @param string $hash
+     * @return string
+     */
     public function convertHashToBlobPath($hash)
     {
         $hash = str_replace("sha256:", "", $hash);
@@ -83,6 +106,12 @@ class Client
         return $path;
     }
 
+    /**
+     * convertHashToManifestPath
+     *
+     * @param string $imageName
+     * @param string $hash
+     */
     public function convertHashToManifestPath($imageName, $hash)
     {
         $hash = str_replace("sha256:", "", $hash);
