@@ -6,10 +6,10 @@ use Bka\ARCleaner\Context;
 use Bka\ARCleaner\Manifest;
 
 /**
- * Class Loader
+ * Class Client
  * @author Bernhard Leers
  */
-class Loader
+class Client
 {
     /**
      * @var Bka\ARCleaner\Context
@@ -35,7 +35,6 @@ class Loader
 
         foreach ($blobs as $blob) {
             if (strpos($blob->getName(), "_manifests/tags") && !strpos($blob->getName(), "current")) {
-                echo $blob->getName()."\n";
                 $out = [];
                 preg_match("/(\/docker\/registry\/v2\/repositories\/)(\w*)\/_manifests\/tags\/([a-zA-Z0-9\.]*)\//", $blob->getName(), $out);
                 $imageName = $out[2];
@@ -51,22 +50,23 @@ class Loader
         return $result;
     }
 
-    public function deleteImage($imageName, $tag)
+    public function getBlobsToDeleteForImage($imageName, $tag)
     {
+        $names = [];
         $blobList = $this->context->getClient()->listBlobs($this->context->getRepository());
         $blobs = $blobList->getBlobs();
         foreach ($blobs as $blob) {
             if (strpos($blob->getName(), "_manifests/tags") && strpos($blob->getName(), $tag) && strpos($blob->getName(), $imageName)) {
-                echo $blob->getName() . "\n";
+                $names[] = $blob->getName();
                 $out = [];
                 preg_match("/(\/docker\/registry\/v2\/repositories\/)(\w*)\/_manifests\/tags\/([a-zA-Z0-9\.]*)\//", $blob->getName(), $out);
                 $imageName = $out[2];
                 $hash = $this->readBlob($blob->getName());
                 $path = $this->convertHashToManifestPath($imageName, $hash);
-                echo $path . "\n";
+                $names[] = $path;
             }
         }
-
+        return array_unique($names);
     }
 
     public function readBlob($name)

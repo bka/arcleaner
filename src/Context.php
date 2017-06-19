@@ -10,7 +10,6 @@ use MicrosoftAzure\Storage\Common\Exceptions\ServiceException;
  */
 class Context
 {
-
     /**
      * @var \MicrosoftAzure\Storage\Blob\BlobRestProxy
      */

@@ -56,4 +56,14 @@ class Image
     {
         return array_keys($this->manifest->getLayers());
     }
+
+    public function getLayer($hash)
+    {
+        return $this->manifest->getLayers()[$hash];
+    }
+
+    public function getFullName()
+    {
+        return $this->name . ":" . $this->tag;
+    }
 }

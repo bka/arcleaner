@@ -15,4 +15,9 @@ class Layer
         $this->hash = $hash;
         $this->size = $size;
     }
+
+    public function getHash()
+    {
+        return $this->hash;
+    }
 }
