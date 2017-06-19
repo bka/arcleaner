@@ -7,7 +7,9 @@
         }
     ],
     "require": {
-        "microsoft/azure-storage": "^0.16.0"
+        "microsoft/azure-storage": "^0.16.0",
+        "symfony/console": "^2.3.0|^3",
+        "pimple/pimple": "^3.0"
     },
     "autoload": {
         "psr-4" : {
