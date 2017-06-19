@@ -1,0 +1,17 @@
+{
+    "name": "bka/azure-storage-client",
+    "authors": [
+        {
+            "name": "Bernhard Leers",
+            "email": "b.leers@neusta.de"
+        }
+    ],
+    "require": {
+        "microsoft/azure-storage": "^0.16.0"
+    },
+    "autoload": {
+        "psr-4" : {
+            "Bka\\ARCleaner\\" : "src/"
+        }
+    }
+}
