@@ -68,9 +68,15 @@ class DeleteImage extends BaseCommand
         $blobs = array_merge($layerBlobNames, $metaBlobNames);
 
         foreach ($blobs as $blob) {
+            $output->writeln("deleting " . $blob);
             if ($dry) {
-                $output->writeln("deleting " . $blob);
                 continue;
+            }
+
+            try {
+                $client->deleteBlob($blob);
+            } catch (\MicrosoftAzure\Storage\Common\Exceptions\ServiceException $e) {
+                $this->output->writeln('<error>could not delete ' . $blob . '</error>');
             }
         }
     }

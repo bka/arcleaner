@@ -93,6 +93,16 @@ class Client
     }
 
     /**
+     * deleteBlob
+     *
+     * @param string $name
+     */
+    public function deleteBlob($name)
+    {
+        $this->context->getClient()->deleteBlob($this->context->getRepository(), $name);
+    }
+
+    /**
      * convertHashToBlobPath
      *
      * @param string $hash
